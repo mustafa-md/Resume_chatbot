@@ -1,4 +1,5 @@
 import smtplib
+from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -26,14 +27,22 @@ class EmailSender:
 
             # string to store the body of the mail
             #body = "This will contain attachment"
-            body=message
+            body = message
 
             # attach the body with the msg instance
             self.msg.attach(MIMEText(body, 'html'))
 
+            part = MIMEBase('application', "octet-stream")
+            # part.set_payload(open("Resume_MD.pdf", "rb").read())
+            # encoders.encode_base64(part)
+            #
+            # part.add_header('Content-Disposition', 'attachment; filename="Resume_MD.pdf"')
+
+            # self.msg.attach(part)
+
 
             # instance of MIMEBase and named as p
-            self.p = MIMEBase('application', 'octet-stream')
+            # self.p = MIMEBase('application', 'octet-stream')
 
 
             # creates SMTP session
@@ -49,9 +58,7 @@ class EmailSender:
             self.text = self.msg.as_string()
 
             # sending the mail
-            self.smtp.sendmail(self.msg['From'] , recepient_email, self.text)
-
-
+            self.smtp.sendmail(self.msg['From'], recepient_email, self.text)
 
             # terminating the session
             self.smtp.quit()
