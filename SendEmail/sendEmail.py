@@ -32,14 +32,13 @@ class EmailSender:
             # attach the body with the msg instance
             self.msg.attach(MIMEText(body, 'html'))
 
-            part = MIMEBase('application', "octet-stream")
-            # part.set_payload(open("Resume_MD.pdf", "rb").read())
-            # encoders.encode_base64(part)
-            #
-            # part.add_header('Content-Disposition', 'attachment; filename="Resume_MD.pdf"')
+            self.p = MIMEBase('application', "octet-stream")
+            self.p.set_payload(open("Resume_MD.pdf", "rb").read())
+            encoders.encode_base64(self.p)
 
-            # self.msg.attach(part)
+            self.p.add_header('Content-Disposition', 'attachment; filename="Resume_MD.pdf"')
 
+            self.msg.attach(self.p)
 
             # instance of MIMEBase and named as p
             # self.p = MIMEBase('application', 'octet-stream')

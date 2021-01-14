@@ -47,7 +47,7 @@ def processRequest(req):
     # cust_contact = parameters.get("cust_contact")
     # cust_email=parameters.get("cust_email")
     # course_name= parameters.get("course_name")
-    intent = result.get("intent").get('displayName')
+    # intent = result.get("intent").get('displayName')
     # if (intent=='course_selection'):
 
     email_sender=EmailSender()
@@ -58,10 +58,12 @@ def processRequest(req):
     # email_message_support = email_file_support.read()
     # email_sender.send_email_to_support(cust_name=cust_name,cust_contact=cust_contact,cust_email=cust_email,course_name=course_name,body=email_message_support)
     # fulfillmentText="We have sent the course syllabus and other relevant details to you via email. An email has been sent to the Support Team with your contact information, you'll be contacted soon. Do you have further queries?"
-    fulfillmentText="An email has been sent to you with all the required information"
-    log.write_log(sessionID, "Bot Says: "+fulfillmentText)
+    # fulfillmentText="An email has been sent to you with all the required information"
+
+    # log.write_log(sessionID, "Bot Says: "+fulfillmentText)
     return {
-        "fulfillmentText": fulfillmentText
+        "fulfillmentText": result.get("fulfillmentText"),
+        "fulfillmentMessages": result.get("fulfillmentMessages")
     }
     # else:
     #     log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
